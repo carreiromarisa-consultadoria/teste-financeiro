@@ -382,25 +382,15 @@
         return { skipped: true };
       }
 
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 7000);
 
-      try {
-        const response = await fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
-          body: JSON.stringify(lead),
-          signal: controller.signal
-        });
-        clearTimeout(timeout);
-        return { ok: response.ok };
-      } catch (error) {
-        clearTimeout(timeout);
-        return { ok: false, error: String(error) };
-      }
-    }
+      fetch(APPS_SCRIPT_URL, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'text/plain;charset=utf-8'
+  },
+  body: JSON.stringify(lead)
+})
+.catch(() => {});
 
     document.querySelectorAll('input[type="radio"]').forEach(el => el.addEventListener('change', updateState));
     nome.addEventListener('input', updateState);
