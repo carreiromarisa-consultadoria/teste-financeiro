@@ -437,14 +437,14 @@
       statusBox.style.display = 'block';
       statusBox.textContent = 'A guardar e a enviar os dados...';
 
-      await sendLead(lead);
+      sendLead(lead).catch(() => {});
 
-      const params = new URLSearchParams();
-      answers.forEach((value, idx) => params.set(`q${idx+1}`, value));
-      params.set('score', score);
-      params.set('nome', nome.value.trim());
+const params = new URLSearchParams();
+answers.forEach((value, idx) => params.set(`q${idx+1}`, value));
+params.set('score', score);
+params.set('nome', nome.value.trim());
 
-      window.location.href = 'resultado-teste-mulher-financeira-final.html?' + params.toString();
+window.location.href = 'resultado.html?' + params.toString();
     });
 
     updateState();
