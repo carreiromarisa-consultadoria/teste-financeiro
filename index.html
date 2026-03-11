@@ -378,76 +378,66 @@
     }
 
     async function sendLead(lead) {
-      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('COLE_AQUI')) {
-        return { skipped: true };
-      }
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain;charset=utf-8'
+    },
+    body: JSON.stringify(lead)
+  }).catch(() => {});
+}
 
+document.querySelectorAll('input[type="radio"]').forEach(el => el.addEventListener('change', updateState));
+nome.addEventListener('input', updateState);
+email.addEventListener('input', updateState);
+consent.addEventListener('change', updateState);
 
-      fetch(APPS_SCRIPT_URL, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'text/plain;charset=utf-8'
-  },
-  body: JSON.stringify(lead)
-})
-.catch(() => {});
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
 
-    document.querySelectorAll('input[type="radio"]').forEach(el => el.addEventListener('change', updateState));
-    nome.addEventListener('input', updateState);
-    email.addEventListener('input', updateState);
-    consent.addEventListener('change', updateState);
+  const answers = getAnswers();
+  const count = answers.filter(Boolean).length;
+  const okName = nome.value.trim().length >= 2;
+  const okEmail = validEmail(email.value);
+  const okConsent = consent.checked;
 
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const answers = getAnswers();
-      const count = answers.filter(Boolean).length;
-      const okName = nome.value.trim().length >= 2;
-      const okEmail = validEmail(email.value);
-      const okConsent = consent.checked;
+  if (!(count === 6 && okName && okEmail && okConsent)) {
+    errorBox.style.display = 'block';
+    errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
 
-      if (!(count === 6 && okName && okEmail && okConsent)) {
-        errorBox.style.display = 'block';
-        errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        return;
-      }
+  const score = computeScore(answers);
 
-      const score = computeScore(answers);
-      const lead = {
-        nome: nome.value.trim(),
-        email: email.value.trim(),
-        consentimento: true,
-        respostas: answers,
-        q1: answers[0],
-        q2: answers[1],
-        q3: answers[2],
-        q4: answers[3],
-        q5: answers[4],
-        q6: answers[5],
-        score: score,
-        origem: 'teste-mulher-financeira',
-        dataISO: new Date().toISOString(),
-        userAgent: navigator.userAgent
-      };
+  let perfil = '';
+  if (score >= 21) {
+    perfil = 'Mulher em Expansão';
+  } else if (score >= 17) {
+    perfil = 'Mulher em Consolidação';
+  } else if (score >= 12) {
+    perfil = 'Mulher em Estrutura';
+  } else {
+    perfil = 'Mulher em Despertar';
+  }
 
-      localStorage.setItem('testeMulherFinanceiraLead', JSON.stringify(lead));
-      localStorage.setItem('testeMulherFinanceiraRespostas', JSON.stringify(answers));
-      localStorage.setItem('testeMulherFinanceiraPontuacao', String(score));
+  const lead = {
+    nome: nome.value.trim(),
+    email: email.value.trim(),
+    score: score,
+    perfil: perfil
+  };
 
-      submitBtn.disabled = true;
-      statusBox.style.display = 'block';
-      statusBox.textContent = 'A guardar e a enviar os dados...';
+  sendLead(lead);
 
-      sendLead(lead).catch(() => {});
+  const params = new URLSearchParams();
+  answers.forEach((value, idx) => params.set(`q${idx + 1}`, value));
+  params.set('score', score);
+  params.set('nome', nome.value.trim());
 
-const params = new URLSearchParams();
-answers.forEach((value, idx) => params.set(`q${idx+1}`, value));
-params.set('score', score);
-params.set('nome', nome.value.trim());
+  window.location.href = 'resultado.html?' + params.toString();
+});
 
-window.location.href = 'resultado.html?' + params.toString();
-    });
-
-    updateState();
+updateState();
   </script>
 </body>
 </html>
