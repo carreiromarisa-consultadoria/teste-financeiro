@@ -1,269 +1,658 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teste Mulher Financeira</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Que Tipo de Mulher Financeira És?</title>
+  <style>
+    :root {
+      --bg: #f7f2ed;
+      --card: #ffffff;
+      --text: #3b2f27;
+      --muted: #6f6259;
+      --line: #e7d8ca;
+      --accent: #c79b63;
+      --accent-dark: #b4864e;
+      --soft: #faf6f1;
+      --danger: #9a4d3f;
+      --shadow: 0 10px 25px rgba(0,0,0,0.05);
+      --radius: 16px;
+    }
 
-<style>
-body{
-font-family:Arial,Helvetica,sans-serif;
-background:#f7f2ed;
-margin:0;
-padding:30px;
-color:#3b2f27;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.container{
-max-width:700px;
-margin:auto;
-background:white;
-padding:30px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.05);
-}
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px 14px 40px;
+    }
 
-h1{
-margin-top:0;
-}
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
 
-.question{
-margin-top:25px;
-}
+    .hero,
+    .card,
+    .question,
+    .cta {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
 
-.option{
-display:block;
-margin:8px 0;
-padding:10px;
-border:1px solid #e5d8cc;
-border-radius:8px;
-cursor:pointer;
-}
+    .hero,
+    .card,
+    .question,
+    .cta {
+      padding: 20px 18px;
+      margin-bottom: 16px;
+    }
 
-button{
-margin-top:25px;
-padding:14px;
-width:100%;
-border:none;
-border-radius:30px;
-background:#c79b63;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--accent-dark);
+      background: #f5ede4;
+      border: 1px solid #eadbca;
+      padding: 7px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
 
-button:hover{
-background:#b4864e;
-}
+    h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      line-height: 1.1;
+      font-family: Georgia, "Times New Roman", serif;
+    }
 
-input[type=text],input[type=email]{
-width:100%;
-padding:10px;
-margin-top:5px;
-margin-bottom:10px;
-border:1px solid #ddd;
-border-radius:6px;
-}
-</style>
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .intro {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      color: #5c4f46;
+      font-size: 14px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .bar {
+      width: 100%;
+      height: 10px;
+      background: #efe2d5;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(180deg, #d0a46e 0%, #bc8f59 100%);
+      transition: width .2s ease;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .grid.two {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    label.field-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 7px;
+      color: #56473d;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #ddd0c3;
+      border-radius: 12px;
+      font-size: 16px;
+      background: #fffdfa;
+      color: var(--text);
+      outline: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(199,155,99,0.12);
+    }
+
+    .mini-note {
+      font-size: 13px;
+      color: #7a6f66;
+      margin-top: 2px;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 10px;
+      color: #5d5047;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .checkbox input {
+      margin-top: 3px;
+      accent-color: var(--accent-dark);
+    }
+
+    .question-number {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-dark);
+      background: #f5ede4;
+      border: 1px solid #eadbca;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .question h2 {
+      margin: 0 0 8px;
+      font-size: 21px;
+      line-height: 1.3;
+      color: #47362d;
+    }
+
+    .question-text {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .options {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .option {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px 14px;
+      border: 1px solid #eadfd4;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffdfb 0%, #faf4ee 100%);
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      min-height: 72px;
+    }
+
+    .option:hover {
+      border-color: #d8b78f;
+      box-shadow: 0 6px 18px rgba(135, 96, 54, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f2e7db;
+      border: 1px solid #e2d3c2;
+      color: #8a6d4d;
+      font-weight: 700;
+      font-size: 14px;
+      margin-top: 1px;
+    }
+
+    .option-text {
+      font-size: 15px;
+      line-height: 1.45;
+      color: #4c4138;
+    }
+
+    .option input[type="radio"]:checked + .badge {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .option:has(input[type="radio"]:checked) {
+      border-color: var(--accent);
+      background: linear-gradient(180deg, #fffaf5 0%, #f8eee3 100%);
+      box-shadow: 0 8px 20px rgba(135, 96, 54, 0.12);
+    }
+
+    .cta p {
+      margin: 0 0 14px;
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .button {
+      width: 100%;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #d0a46e 0%, #bc8f59 100%);
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.2;
+      padding: 16px 18px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(160, 111, 54, 0.20);
+    }
+
+    .button:hover {
+      background: linear-gradient(180deg, #c79962 0%, #ae814c 100%);
+    }
+
+    .button[disabled] {
+      opacity: .55;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .helper {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 13px;
+      color: #7b6f66;
+    }
+
+    .error {
+      display: none;
+      margin-top: 12px;
+      padding: 11px 12px;
+      border-radius: 12px;
+      background: #fff4ef;
+      border: 1px solid #f0d4c6;
+      color: var(--danger);
+      font-size: 14px;
+    }
+  </style>
 </head>
-
 <body>
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">Teste financeiro feminino</div>
+      <h1>Que Tipo de Mulher Financeira És?</h1>
+      <p>Responde às 6 perguntas e descobre o teu perfil financeiro atual. No final, vais perceber em que ponto estás e qual o próximo passo para ganhares mais clareza, estabilidade e segurança.</p>
+      <div class="intro">
+        Escolhe sempre a opção que mais se aproxima da tua realidade atual. Quanto mais honesta fores nas respostas, mais útil será o teu resultado.
+      </div>
+    </section>
 
-<div class="container">
+    <section class="card">
+      <div class="progress-top">
+        <span>Progresso do teste</span>
+        <strong id="progressText">0/6 respondidas</strong>
+      </div>
+      <div class="bar"><span id="progressBar"></span></div>
+    </section>
 
-<h1>Que Tipo de Mulher Financeira És?</h1>
+    <form id="quizForm">
+      <section class="card">
+        <h2 style="margin-top:0;">Antes de veres o teu resultado</h2>
+        <div class="grid two">
+          <div>
+            <label class="field-label" for="nome">Nome</label>
+            <input id="nome" type="text" placeholder="O teu primeiro nome" />
+          </div>
+          <div>
+            <label class="field-label" for="email">Email</label>
+            <input id="email" type="email" placeholder="o.teu@email.com" />
+          </div>
+        </div>
 
-<form id="quizForm">
+        <div class="mini-note">Estes dados permitem apresentar o teu resultado e guardar o teu pedido no Google Sheets.</div>
 
-<label>Nome</label>
-<input id="nome" type="text" required>
+        <label class="checkbox">
+          <input id="consent" type="checkbox" />
+          <span>Autorizo o tratamento destes dados para receber o meu resultado e informação relacionada com consultoria financeira.</span>
+        </label>
+      </section>
 
-<label>Email</label>
-<input id="email" type="email" required>
+      <section class="question">
+        <div class="question-number">Pergunta 1</div>
+        <h2>Quando recebes o teu rendimento mensal, o que acontece normalmente primeiro?</h2>
+        <p class="question-text">Escolhe a opção que mais se aproxima da forma como geres o dinheiro no início do mês.</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q1" value="A">
+            <span class="badge">A</span>
+            <span class="option-text">Pago as contas e depois logo vejo o que sobra.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="B">
+            <span class="badge">B</span>
+            <span class="option-text">Tento organizar, mas nem sempre consigo cumprir o que planeei.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="C">
+            <span class="badge">C</span>
+            <span class="option-text">Tenho uma estrutura básica de organização financeira.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="D">
+            <span class="badge">D</span>
+            <span class="option-text">Distribuo estrategicamente entre despesas, poupança e objetivos.</span>
+          </label>
+        </div>
+      </section>
 
-<label>
-<input id="consent" type="checkbox">
-Autorizo o tratamento destes dados
-</label>
+      <section class="question">
+        <div class="question-number">Pergunta 2</div>
+        <h2>Quando pensas no teu dinheiro, o que sentes com mais frequência?</h2>
+        <p class="question-text">A tua emoção dominante diz muito sobre o teu momento financeiro atual.</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q2" value="A">
+            <span class="badge">A</span>
+            <span class="option-text">Ansiedade.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="B">
+            <span class="badge">B</span>
+            <span class="option-text">Preocupação.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="C">
+            <span class="badge">C</span>
+            <span class="option-text">Algum controlo.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="D">
+            <span class="badge">D</span>
+            <span class="option-text">Confiança.</span>
+          </label>
+        </div>
+      </section>
 
+      <section class="question">
+        <div class="question-number">Pergunta 3</div>
+        <h2>Como está a tua situação de poupança neste momento?</h2>
+        <p class="question-text">Pensa na tua realidade atual, não naquilo que gostarias que estivesse a acontecer.</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q3" value="A">
+            <span class="badge">A</span>
+            <span class="option-text">Não tenho poupanças neste momento.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="B">
+            <span class="badge">B</span>
+            <span class="option-text">Tenho muito pouco guardado.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="C">
+            <span class="badge">C</span>
+            <span class="option-text">Tenho alguma poupança, mas ainda quero reforçar mais.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="D">
+            <span class="badge">D</span>
+            <span class="option-text">Tenho uma estratégia de poupança e crescimento financeiro.</span>
+          </label>
+        </div>
+      </section>
 
-<div class="question">
-<p><b>Pergunta 1</b></p>
+      <section class="question">
+        <div class="question-number">Pergunta 4</div>
+        <h2>Se surgisse uma despesa inesperada hoje, o que aconteceria?</h2>
+        <p class="question-text">Esta pergunta ajuda a perceber o teu nível real de proteção e margem financeira.</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q4" value="A">
+            <span class="badge">A</span>
+            <span class="option-text">Ficaria completamente desorganizada financeiramente.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q4" value="B">
+            <span class="badge">B</span>
+            <span class="option-text">Conseguia pagar, mas ficaria bastante apertada.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q4" value="C">
+            <span class="badge">C</span>
+            <span class="option-text">Conseguia resolver sem grande impacto.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q4" value="D">
+            <span class="badge">D</span>
+            <span class="option-text">Tenho fundo de emergência preparado para isso.</span>
+          </label>
+        </div>
+      </section>
 
-<label class="option">
-<input type="radio" name="q1" value="A"> Pago contas e depois vejo
-</label>
+      <section class="question">
+        <div class="question-number">Pergunta 5</div>
+        <h2>Quando tens de tomar decisões financeiras importantes…</h2>
+        <p class="question-text">Escolhe a opção que mais se aproxima da tua forma habitual de decidir.</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q5" value="A">
+            <span class="badge">A</span>
+            <span class="option-text">Evito ou adio decisões porque me sinto insegura.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q5" value="B">
+            <span class="badge">B</span>
+            <span class="option-text">Fico com muitas dúvidas e receio de errar.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q5" value="C">
+            <span class="badge">C</span>
+            <span class="option-text">Analiso e decido com alguma segurança.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q5" value="D">
+            <span class="badge">D</span>
+            <span class="option-text">Tomo decisões com estratégia e visão de longo prazo.</span>
+          </label>
+        </div>
+      </section>
 
-<label class="option">
-<input type="radio" name="q1" value="B"> Tento organizar
-</label>
+      <section class="question">
+        <div class="question-number">Pergunta 6</div>
+        <h2>Qual destas frases descreve melhor o que queres para o teu dinheiro?</h2>
+        <p class="question-text">Pensa no teu objetivo principal neste momento.</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q6" value="A">
+            <span class="badge">A</span>
+            <span class="option-text">Parar de viver em stress financeiro.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q6" value="B">
+            <span class="badge">B</span>
+            <span class="option-text">Organizar finalmente as minhas contas.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q6" value="C">
+            <span class="badge">C</span>
+            <span class="option-text">Criar estabilidade e segurança financeira.</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q6" value="D">
+            <span class="badge">D</span>
+            <span class="option-text">Fazer o dinheiro trabalhar para mim.</span>
+          </label>
+        </div>
+      </section>
 
-<label class="option">
-<input type="radio" name="q1" value="C"> Já tenho sistema
-</label>
+      <section class="cta">
+        <p>Completa os teus dados e responde às 6 perguntas para desbloqueares o teu resultado.</p>
+        <button type="submit" class="button" id="submitBtn" disabled>Ver o meu resultado</button>
+        <div class="helper">No fim, vais ver o teu perfil financeiro e o teu próximo passo.</div>
+        <div class="error" id="errorBox">Falta preencher o nome, o email, o consentimento e as 6 respostas.</div>
+      </section>
+    </form>
+  </main>
 
-<label class="option">
-<input type="radio" name="q1" value="D"> Distribuo estrategicamente
-</label>
-</div>
+  <script>
+    const APPS_SCRIPT_URL = "COLE_AQUI_O_LINK_COMPLETO_DO_APPS_SCRIPT";
 
+    const form = document.getElementById("quizForm");
+    const progressText = document.getElementById("progressText");
+    const progressBar = document.getElementById("progressBar");
+    const submitBtn = document.getElementById("submitBtn");
+    const errorBox = document.getElementById("errorBox");
+    const nome = document.getElementById("nome");
+    const email = document.getElementById("email");
+    const consent = document.getElementById("consent");
 
-<div class="question">
-<p><b>Pergunta 2</b></p>
+    function getAnswers() {
+      const answers = [];
+      for (let i = 1; i <= 6; i++) {
+        const checked = document.querySelector(`input[name="q${i}"]:checked`);
+        answers.push(checked ? checked.value : null);
+      }
+      return answers;
+    }
 
-<label class="option">
-<input type="radio" name="q2" value="A"> Ansiedade
-</label>
+    function validEmail(value) {
+      return value.trim().length > 5 && value.includes("@");
+    }
 
-<label class="option">
-<input type="radio" name="q2" value="B"> Preocupação
-</label>
+    function computeScore(answers) {
+      const map = { A: 1, B: 2, C: 3, D: 4 };
+      return answers.reduce((sum, value) => sum + map[value], 0);
+    }
 
-<label class="option">
-<input type="radio" name="q2" value="C"> Controlo
-</label>
+    function getPerfil(score) {
+      if (score >= 21) return "Mulher em Expansão";
+      if (score >= 17) return "Mulher em Consolidação";
+      if (score >= 12) return "Mulher em Estrutura";
+      return "Mulher em Despertar";
+    }
 
-<label class="option">
-<input type="radio" name="q2" value="D"> Confiança
-</label>
-</div>
+    function updateState() {
+      const answers = getAnswers();
+      const count = answers.filter(Boolean).length;
+      const okName = nome.value.trim().length >= 2;
+      const okEmail = validEmail(email.value);
+      const okConsent = consent.checked;
 
+      progressText.textContent = `${count}/6 respondidas`;
+      progressBar.style.width = `${(count / 6) * 100}%`;
 
-<div class="question">
-<p><b>Pergunta 3</b></p>
+      const ready = count === 6 && okName && okEmail && okConsent;
+      submitBtn.disabled = !ready;
 
-<label class="option">
-<input type="radio" name="q3" value="A"> Não tenho poupança
-</label>
+      if (ready) {
+        errorBox.style.display = "none";
+      }
+    }
 
-<label class="option">
-<input type="radio" name="q3" value="B"> Tenho pouco
-</label>
+    function sendLead(lead) {
+      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes("COLE_AQUI")) {
+        return;
+      }
 
-<label class="option">
-<input type="radio" name="q3" value="C"> Tenho alguma
-</label>
+      fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(lead)
+      }).catch(() => {});
+    }
 
-<label class="option">
-<input type="radio" name="q3" value="D"> Tenho estratégia
-</label>
-</div>
+    document.querySelectorAll('input[type="radio"]').forEach(el => {
+      el.addEventListener("change", updateState);
+    });
 
+    nome.addEventListener("input", updateState);
+    email.addEventListener("input", updateState);
+    consent.addEventListener("change", updateState);
 
-<div class="question">
-<p><b>Pergunta 4</b></p>
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
 
-<label class="option">
-<input type="radio" name="q4" value="A"> Desorganiza
-</label>
+      const answers = getAnswers();
+      const count = answers.filter(Boolean).length;
+      const okName = nome.value.trim().length >= 2;
+      const okEmail = validEmail(email.value);
+      const okConsent = consent.checked;
 
-<label class="option">
-<input type="radio" name="q4" value="B"> Complica
-</label>
+      if (!(count === 6 && okName && okEmail && okConsent)) {
+        errorBox.style.display = "block";
+        errorBox.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
 
-<label class="option">
-<input type="radio" name="q4" value="C"> Consigo lidar
-</label>
+      const score = computeScore(answers);
+      const perfil = getPerfil(score);
 
-<label class="option">
-<input type="radio" name="q4" value="D"> Tenho fundo
-</label>
-</div>
+      const lead = {
+        nome: nome.value.trim(),
+        email: email.value.trim(),
+        score: score,
+        perfil: perfil
+      };
 
+      sendLead(lead);
 
-<div class="question">
-<p><b>Pergunta 5</b></p>
+      const params = new URLSearchParams();
+      answers.forEach((value, idx) => params.set(`q${idx + 1}`, value));
+      params.set("score", score);
+      params.set("nome", nome.value.trim());
 
-<label class="option">
-<input type="radio" name="q5" value="A"> Evito decidir
-</label>
+      window.location.href = "resultado.html?" + params.toString();
+    });
 
-<label class="option">
-<input type="radio" name="q5" value="B"> Decido com dúvida
-</label>
-
-<label class="option">
-<input type="radio" name="q5" value="C"> Analiso
-</label>
-
-<label class="option">
-<input type="radio" name="q5" value="D"> Estratégia
-</label>
-</div>
-
-
-<div class="question">
-<p><b>Pergunta 6</b></p>
-
-<label class="option">
-<input type="radio" name="q6" value="A"> Parar stress
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="B"> Organizar
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="C"> Estabilidade
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="D"> Fazer dinheiro crescer
-</label>
-</div>
-
-
-<button type="submit">Ver o meu resultado</button>
-
-</form>
-
-</div>
-
-<script>
-
-const APPS_SCRIPT_URL="https://script.google.com/macros/s/AKfycbwm4n74PMbV3ZRk1igbDZGMxNKMWmXvox6v0_sByVphahxcS5IiEOtPcNg8RB5jMU_AVg/exec";
-
-document.getElementById("quizForm").addEventListener("submit",function(e){
-
-e.preventDefault();
-
-const nome=document.getElementById("nome").value;
-const email=document.getElementById("email").value;
-const consent=document.getElementById("consent").checked;
-
-if(!nome||!email||!consent){
-alert("Preenche os dados primeiro");
-return;
-}
-
-let score=0;
-
-document.querySelectorAll("input[type=radio]:checked").forEach(el=>{
-
-if(el.value==="A")score+=1;
-if(el.value==="B")score+=2;
-if(el.value==="C")score+=3;
-if(el.value==="D")score+=4;
-
-});
-
-const data={
-
-nome:nome,
-email:email,
-score:score
-
-};
-
-fetch(APPS_SCRIPT_URL,{
-method:"POST",
-body:JSON.stringify(data)
-}).catch(()=>{});
-
-window.location.href="resultado.html?score="+score;
-
-});
-</script>
-
+    updateState();
+  </script>
 </body>
 </html>
