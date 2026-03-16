@@ -595,19 +595,20 @@
       }
     }
 
-    function sendLead(lead) {
-      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes("COLE_AQUI")) {
-        return;
-      }
+ function sendLead(lead) {
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes("COLE_AQUI")) {
+    return;
+  }
 
-      fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(lead)
-      }).catch(() => {});
-    }
+  fetch(APPS_SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify(lead)
+  }).catch((err) => console.error("Erro no envio:", err));
+}
 
     document.querySelectorAll('input[type="radio"]').forEach(el => {
       el.addEventListener("change", updateState);
