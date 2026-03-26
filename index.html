@@ -1,114 +1,142 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teste Financeiro</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teste Financeiro</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0d0d0d;
+      color: #fff;
+    }
 
-<style>
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #0d0d0d;
-    color: #ffffff;
-}
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
 
-.container {
-    max-width: 520px;
-    margin: auto;
-    padding: 40px 20px;
-    text-align: center;
-}
+    h1 {
+      font-size: 40px;
+      line-height: 1.1;
+      margin: 0 0 16px;
+      text-align: center;
+    }
 
-h1 {
-    font-size: 34px;
-    line-height: 1.2;
-    margin-bottom: 15px;
-}
+    .highlight {
+      color: #e6c07b;
+    }
 
-.highlight {
-    color: #e6c07b;
-}
+    .sub {
+      max-width: 640px;
+      margin: 0 auto 28px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.5;
+      color: #cfcfcf;
+    }
 
-.sub {
-    font-size: 16px;
-    color: #cccccc;
-    margin-bottom: 35px;
-}
+    .top-boxes {
+      display: grid;
+      gap: 12px;
+      margin: 0 auto 30px;
+      max-width: 640px;
+    }
 
-.block {
-    background: #1a1a1a;
-    padding: 18px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    text-align: left;
-}
+    .box {
+      background: #171717;
+      border: 1px solid rgba(230, 192, 123, 0.18);
+      border-radius: 14px;
+      padding: 16px 18px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
 
-.block strong {
-    color: #e6c07b;
-}
+    .form-wrap {
+      background: #111;
+      border: 1px solid rgba(230, 192, 123, 0.18);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
 
-.button {
-    width: 100%;
-    padding: 18px;
-    background: linear-gradient(90deg, #c8a96a, #e6c07b);
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: black;
-    cursor: pointer;
-    margin-top: 30px;
-}
+    iframe {
+      width: 100%;
+      min-height: 1250px;
+      border: 0;
+      border-radius: 12px;
+      background: #fff;
+    }
 
-.footer {
-    margin-top: 40px;
-    font-size: 12px;
-    color: #777;
-}
-</style>
+    .footer {
+      text-align: center;
+      margin-top: 22px;
+      font-size: 12px;
+      color: #8f8f8f;
+    }
+
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      .sub {
+        font-size: 16px;
+      }
+
+      iframe {
+        min-height: 1350px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
+    <h1>Que tipo de mulher <span class="highlight">financeira</span> és?</h1>
 
-<div class="container">
+    <p class="sub">
+      Responde a 6 perguntas e descobre o que está a travar
+      ou a acelerar o teu dinheiro.
+    </p>
 
-<h1>
-Que tipo de mulher <span class="highlight">financeira</span> és?
-</h1>
+    <div class="top-boxes">
+      <div class="box">👉 Descobre o teu perfil financeiro</div>
+      <div class="box">👉 Percebe o teu maior erro neste momento</div>
+      <div class="box">👉 Recebe clareza sobre o próximo passo</div>
+    </div>
 
-<p class="sub">
-A maioria das pessoas acha que tem um problema de dinheiro…  
-mas na verdade tem um problema de comportamento.
-</p>
+    <div class="form-wrap">
+      <iframe
+        data-tally-src="https://tally.so/embed/KYLaMk?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+        loading="lazy"
+        title="Teste Financeiro">
+      </iframe>
+    </div>
 
-<div class="block">
-👉 <strong>Responde a 6 perguntas</strong> simples
-</div>
+    <div class="footer">Marisa Carreiro — Finanças Pessoais</div>
+  </div>
 
-<div class="block">
-👉 Descobre <strong>o teu maior erro financeiro</strong>
-</div>
-
-<div class="block">
-👉 Percebe <strong>o que tens de mudar já</strong>
-</div>
-
-<button class="button" onclick="abrirTeste()">
-QUERO SABER O MEU PERFIL
-</button>
-
-<div class="footer">
-Marisa Carreiro — Finanças Pessoais
-</div>
-
-</div>
-
-<script>
-function abrirTeste() {
-    window.location.href = "https://tally.so/r/KYLaMk";
-}
-</script>
-
+  <script>
+    var d = document, w = "https://tally.so/widgets/embed.js", v = function () {
+      if (typeof Tally !== "undefined") {
+        Tally.loadEmbeds();
+      } else {
+        d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
+          e.src = e.dataset.tallySrc;
+        });
+      }
+    };
+    if (typeof Tally !== "undefined") {
+      v();
+    } else if (d.querySelector('script[src="' + w + '"]') == null) {
+      var s = d.createElement("script");
+      s.src = w;
+      s.onload = v;
+      s.onerror = v;
+      d.body.appendChild(s);
+    }
+  </script>
 </body>
 </html>
