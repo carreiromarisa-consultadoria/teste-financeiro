@@ -3,338 +3,435 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resultado | Que Tipo de Mulher Financeira És?</title>
+  <title>Resultado | Teste Financeiro</title>
   <style>
-    :root{
-      --bg:#f7f2ed;
-      --card:#fffdfa;
-      --text:#3d312a;
-      --muted:#6e6158;
-      --line:#e8ddd1;
-      --accent:#c79b63;
-      --accent-dark:#a87b47;
-      --soft:#f5ede4;
-      --shadow:0 10px 30px rgba(82,58,39,.08);
-      --radius:18px;
+    :root {
+      --bg: #060606;
+      --card: #111111;
+      --card-2: #171717;
+      --text: #f5f2eb;
+      --muted: #c9c1b2;
+      --line: rgba(230, 192, 123, 0.18);
+      --gold: #e6c07b;
+      --gold-strong: #cfa055;
+      --danger: #ff7d7d;
+      --soft: #1e1e1e;
+      --radius: 20px;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
     }
 
-    *{box-sizing:border-box}
+    * {
+      box-sizing: border-box;
+    }
 
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top right, rgba(199,155,99,.10), transparent 28%),
-        linear-gradient(180deg,#fbf7f2 0%, var(--bg) 100%);
-      color:var(--text);
-      padding:24px 14px 40px;
+        radial-gradient(circle at top, rgba(230,192,123,0.08), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
     }
 
-    .wrap{
-      max-width:760px;
-      margin:0 auto;
+    .container {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 34px 20px 60px;
     }
 
-    .card{
-      background:rgba(255,253,250,.97);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:22px 18px;
-      margin-bottom:16px;
+    .hero {
+      text-align: center;
+      margin-bottom: 28px;
     }
 
-    .eyebrow{
-      display:inline-block;
-      font-size:12px;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:var(--accent-dark);
-      background:rgba(199,155,99,.10);
-      border:1px solid rgba(199,155,99,.18);
-      padding:7px 10px;
-      border-radius:999px;
-      margin-bottom:12px;
+    .eyebrow {
+      display: inline-block;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
     }
 
-    h1{
-      margin:0 0 8px;
-      font-size:34px;
-      line-height:1.08;
-      font-family:Georgia, "Times New Roman", serif;
-      color:#4c392f;
+    h1 {
+      margin: 0 0 14px;
+      font-size: 42px;
+      line-height: 1.08;
+      font-weight: 800;
     }
 
-    .lead{
-      color:var(--muted);
-      font-size:17px;
-      line-height:1.55;
-      margin:0;
+    .lead {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 18px;
+      color: var(--muted);
     }
 
-    .result-box{
-      text-align:center;
-      padding:26px 18px;
-      background:linear-gradient(180deg,#fffaf5 0%, #f8eee3 100%);
-      border:1px solid #eadccf;
-      border-radius:18px;
+    .intro-card,
+    .profile-card,
+    .cta-card {
+      background: linear-gradient(180deg, var(--card), var(--card-2));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
 
-    .result-label{
-      font-size:13px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:var(--accent-dark);
-      font-weight:700;
-      margin-bottom:8px;
+    .intro-card {
+      padding: 26px 22px;
+      margin: 30px 0 22px;
     }
 
-    .result-title{
-      font-family:Georgia, "Times New Roman", serif;
-      font-size:38px;
-      line-height:1.08;
-      margin:0 0 10px;
-      color:#4b372d;
+    .intro-title {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: var(--gold);
     }
 
-    .score{
-      display:inline-block;
-      margin-top:6px;
-      font-size:14px;
-      color:#7a6d63;
-      background:#fff;
-      border:1px solid #eadccf;
-      padding:8px 12px;
-      border-radius:999px;
+    .intro-text {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
     }
 
-    h2{
-      margin:0 0 10px;
-      font-size:22px;
-      color:#47362d;
+    .grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 22px;
     }
 
-    p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:16px;
+    .profile-card {
+      padding: 22px;
     }
 
-    .steps{
-      display:grid;
-      gap:10px;
-      margin-top:14px;
+    .profile-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
     }
 
-    .step{
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:#fffdfa;
-      color:#4c4138;
-      line-height:1.5;
+    .profile-title {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1.15;
     }
 
-    .mini-profiles{
-      display:grid;
-      gap:10px;
-      margin-top:12px;
+    .profile-desc {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
     }
 
-    @media(min-width:768px){
-      .mini-profiles{
-        grid-template-columns:1fr 1fr;
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 15px;
+      color: var(--gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .bullets {
+      margin: 0 0 18px;
+      padding-left: 18px;
+      color: var(--text);
+    }
+
+    .bullets li {
+      margin-bottom: 8px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: 18px 0;
+    }
+
+    .mini-cta {
+      background: rgba(230,192,123,0.08);
+      border: 1px solid rgba(230,192,123,0.14);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .mini-cta strong {
+      color: var(--gold);
+    }
+
+    .cta-card {
+      margin-top: 26px;
+      padding: 26px 22px;
+      text-align: center;
+    }
+
+    .cta-card h2 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      line-height: 1.12;
+    }
+
+    .cta-card p {
+      margin: 0 auto 22px;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 15px;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--gold-strong), var(--gold));
+      color: #111;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .footer {
+      margin-top: 24px;
+      text-align: center;
+      color: #8f8778;
+      font-size: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 24px 16px 46px;
       }
-    }
 
-    .mini{
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:#fcf8f4;
-      color:#5f534a;
-      line-height:1.5;
-    }
+      h1 {
+        font-size: 34px;
+      }
 
-    .cta{
-      text-align:center;
-    }
+      .lead {
+        font-size: 16px;
+      }
 
-    .cta-text{
-      margin-bottom:14px;
-      font-size:17px;
-      color:#5d5047;
-      line-height:1.6;
-    }
+      .profile-title {
+        font-size: 24px;
+      }
 
-    .button{
-      display:block;
-      width:100%;
-      text-decoration:none;
-      border:0;
-      border-radius:999px;
-      background:linear-gradient(180deg,#d0a46e 0%, #bc8f59 100%);
-      color:white;
-      font-weight:700;
-      font-size:18px;
-      line-height:1.2;
-      padding:17px 18px;
-      box-shadow:0 10px 20px rgba(160,111,54,.20);
-      margin-bottom:10px;
-    }
+      .cta-card h2 {
+        font-size: 26px;
+      }
 
-    .button.secondary{
-      background:white;
-      color:#8a6d4d;
-      border:1px solid #dcc9b5;
-      box-shadow:none;
-    }
-
-    .brand{
-      margin-top:18px;
-      text-align:center;
-      color:#8c7f74;
-      font-size:14px;
-      line-height:1.5;
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
+  <div class="container">
 
-    <section class="card">
+    <div class="hero">
       <div class="eyebrow">Resultado do teu teste</div>
-      <h1 id="helloTitle">O teu perfil financeiro</h1>
-      <p class="lead">Este resultado mostra o ponto em que estás hoje na tua relação com o dinheiro e o tipo de estrutura de que mais precisas neste momento.</p>
-    </section>
+      <h1>Qual é o teu <span style="color:#e6c07b;">perfil financeiro</span>?</h1>
+      <p class="lead">
+        O teu resultado não é uma sentença.
+        É um espelho.
+        E quando existe clareza, as decisões tornam-se mais seguras.
+      </p>
+    </div>
 
-    <section class="card">
-      <div class="result-box">
-        <div class="result-label">Perfil principal</div>
-        <h2 class="result-title" id="perfilTitulo">—</h2>
-        <p id="perfilResumo">—</p>
-        <div class="score" id="scoreText">Pontuação: —</div>
+    <div class="intro-card">
+      <h2 class="intro-title">Lê os 4 perfis e vê em qual te revês mais.</h2>
+      <p class="intro-text">
+        Se te identificaste com mais do que um, isso é normal.
+        O importante não é “encaixar perfeitamente”.
+        É perceber o que hoje está a travar o teu dinheiro — e o que precisas mudar.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <div class="profile-card">
+        <div class="profile-tag">Perfil 1</div>
+        <h3 class="profile-title">Mulher Financeiramente Desorganizada</h3>
+        <p class="profile-desc">
+          O dinheiro entra… e desaparece.
+          Há esforço, mas falta estrutura.
+          E isso cria ansiedade, culpa e a sensação constante de estar sempre a correr atrás.
+        </p>
+
+        <div class="section-title">Sinais deste perfil</div>
+        <ul class="bullets">
+          <li>Não sabes exatamente para onde o dinheiro vai.</li>
+          <li>Chegas ao fim do mês com tensão.</li>
+          <li>Uma despesa inesperada desequilibra tudo.</li>
+          <li>Evitas olhar para as contas porque te pesa.</li>
+        </ul>
+
+        <div class="section-title">O que precisas agora</div>
+        <ul class="bullets">
+          <li>clareza sobre os teus números</li>
+          <li>um orçamento simples e realista</li>
+          <li>organização sem culpa</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <div class="mini-cta">
+          <strong>O teu próximo passo:</strong> perceber exatamente para onde está a ir o teu dinheiro e criar uma base estável.
+        </div>
       </div>
-    </section>
 
-    <section class="card">
-      <h2>O que este resultado significa</h2>
-      <p id="significadoTexto"></p>
-    </section>
+      <div class="profile-card">
+        <div class="profile-tag">Perfil 2</div>
+        <h3 class="profile-title">Mulher Financeiramente Perdida</h3>
+        <p class="profile-desc">
+          Tu queres fazer melhor.
+          Sabes que precisas de mudar.
+          Mas falta-te direção, consistência e um plano claro para agir com confiança.
+        </p>
 
-    <section class="card">
-      <h2>O teu próximo passo</h2>
-      <div class="steps" id="stepsList"></div>
-    </section>
+        <div class="section-title">Sinais deste perfil</div>
+        <ul class="bullets">
+          <li>Tentas organizar-te, mas desistes pelo meio.</li>
+          <li>Lês, vês conteúdos, guardas dicas… mas não aplicas com consistência.</li>
+          <li>Sentes que andas sempre a “recomeçar”.</li>
+          <li>Queres controlo, mas ainda não tens método.</li>
+        </ul>
 
-    <section class="card">
-      <h2>Os 4 perfis do teste</h2>
-      <div class="mini-profiles">
-        <div class="mini"><strong>1. Mulher em Despertar</strong><br>Está a perceber que não pode continuar a viver apenas em reação. Precisa de clareza, base e segurança.</div>
-        <div class="mini"><strong>2. Mulher em Estrutura</strong><br>Já existe intenção e consciência, mas falta consistência. O foco é transformar esforço em sistema.</div>
-        <div class="mini"><strong>3. Mulher em Consolidação</strong><br>Já tens organização e visão. O próximo nível é fortalecer a estabilidade e otimizar decisões.</div>
-        <div class="mini"><strong>4. Mulher em Expansão</strong><br>Tens mentalidade estratégica. Agora o objetivo é crescer com intenção, proteção e liberdade financeira.</div>
+        <div class="section-title">O que precisas agora</div>
+        <ul class="bullets">
+          <li>um plano financeiro claro</li>
+          <li>prioridades bem definidas</li>
+          <li>acompanhamento para manter consistência</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <div class="mini-cta">
+          <strong>O teu próximo passo:</strong> transformar boa intenção em decisões práticas que funcionem no teu dia a dia.
+        </div>
       </div>
-    </section>
 
-    <section class="card cta">
-      <p class="cta-text" id="ctaText">Se queres transformar este resultado num plano concreto, o passo seguinte é estruturar as tuas finanças com apoio certo.</p>
+      <div class="profile-card">
+        <div class="profile-tag">Perfil 3</div>
+        <h3 class="profile-title">Mulher Financeiramente Organizada</h3>
+        <p class="profile-desc">
+          Já tens algum controlo.
+          Já pensas antes de decidir.
+          Mas ainda existe margem para melhorar, otimizar e crescer com mais estratégia.
+        </p>
 
-      <a class="button" href="mailto:carreiromarisa@gmail.com?subject=Pedido%20de%20Consultoria%20Financeira&body=Olá%20Marisa,%0A%0AFiz%20o%20teste%20financeiro%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20tua%20consultoria.%0A%0AObrigada." id="ctaButton">
-        Quero estruturar melhor as minhas finanças
-      </a>
+        <div class="section-title">Sinais deste perfil</div>
+        <ul class="bullets">
+          <li>Sabes quanto ganhas e tens noção das despesas.</li>
+          <li>Já criaste alguma estrutura.</li>
+          <li>Tens mais disciplina do que a maioria.</li>
+          <li>Mas sentes que ainda não estás a aproveitar o teu dinheiro ao máximo.</li>
+        </ul>
 
-      <a class="button secondary" href="#" onclick="window.print(); return false;">
-        Guardar / imprimir resultado
-      </a>
+        <div class="section-title">O que precisas agora</div>
+        <ul class="bullets">
+          <li>afinar o teu sistema</li>
+          <li>criar mais eficiência nas tuas decisões</li>
+          <li>começar a pensar crescimento, não só controlo</li>
+        </ul>
 
-      <div class="brand">
-        Consultoria financeira privada para mulheres que querem segurança, estratégia e liberdade financeira.
+        <div class="divider"></div>
+
+        <div class="mini-cta">
+          <strong>O teu próximo passo:</strong> passar de organizada para estratégica.
+        </div>
       </div>
-    </section>
 
-  </main>
+      <div class="profile-card">
+        <div class="profile-tag">Perfil 4</div>
+        <h3 class="profile-title">Mulher Financeiramente Estratégica</h3>
+        <p class="profile-desc">
+          Tu já não andas só a “gerir o mês”.
+          Pensas no futuro, tens visão e sabes que dinheiro também é liberdade de decisão.
+        </p>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const score = parseInt(params.get("score")) || 0;
-    const nome = params.get("nome") || "";
+        <div class="section-title">Sinais deste perfil</div>
+        <ul class="bullets">
+          <li>Tens mais controlo emocional sobre o dinheiro.</li>
+          <li>Tomas decisões com intenção.</li>
+          <li>Já pensas em objetivos, crescimento e estabilidade.</li>
+          <li>Percebes que estratégia vale mais do que impulso.</li>
+        </ul>
 
-    const perfilTitulo = document.getElementById("perfilTitulo");
-    const perfilResumo = document.getElementById("perfilResumo");
-    const significadoTexto = document.getElementById("significadoTexto");
-    const stepsList = document.getElementById("stepsList");
-    const helloTitle = document.getElementById("helloTitle");
-    const scoreText = document.getElementById("scoreText");
-    const ctaButton = document.getElementById("ctaButton");
+        <div class="section-title">O que precisas agora</div>
+        <ul class="bullets">
+          <li>consolidar a tua estrutura</li>
+          <li>continuar a evoluir com visão de longo prazo</li>
+          <li>garantir que o teu dinheiro trabalha a teu favor</li>
+        </ul>
 
-    if (nome) {
-      helloTitle.textContent = `${nome}, este é o teu perfil financeiro`;
-    }
+        <div class="divider"></div>
 
-    scoreText.textContent = `Pontuação: ${score}`;
+        <div class="mini-cta">
+          <strong>O teu próximo passo:</strong> manter a consistência e elevar o teu dinheiro a outro nível.
+        </div>
+      </div>
 
-    let perfil = "";
-    let resumo = "";
-    let significado = "";
-    let steps = [];
-    let ctaTexto = "Quero estruturar melhor as minhas finanças";
+    </div>
 
-    if (score >= 21) {
-      perfil = "Mulher em Expansão";
-      resumo = "Tens uma relação mais estratégica com o dinheiro e já estás a pensar em crescimento, proteção e liberdade.";
-      significado = "O teu resultado mostra que já ultrapassaste a fase da simples organização. Tens visão, maior clareza e capacidade para decidir com mais intenção. Agora o foco não é apenas controlar as finanças — é fazer escolhas mais inteligentes, proteger o que já construíste e criar expansão financeira sustentável.";
-      steps = [
-        "Rever a tua estrutura atual para identificar oportunidades de otimização.",
-        "Fortalecer proteção, reservas e estratégia de médio/longo prazo.",
-        "Trabalhar o dinheiro com mais intenção, não apenas com disciplina."
-      ];
-      ctaTexto = "Quero elevar a minha estratégia financeira";
-    } else if (score >= 17) {
-      perfil = "Mulher em Consolidação";
-      resumo = "Já tens uma base importante e estás numa fase em que a estabilidade pode transformar-se em crescimento.";
-      significado = "O teu resultado mostra que já existe organização financeira e consciência nas tuas decisões. Ainda assim, pode haver áreas onde falta mais alinhamento entre o que ganhas, o que geres e o que queres construir. Esta é uma fase muito importante, porque com estrutura certa consegues consolidar a tua estabilidade e subir de nível.";
-      steps = [
-        "Consolidar a tua organização financeira com mais consistência.",
-        "Reforçar poupança, clareza e margem para decisões mais seguras.",
-        "Transformar uma base boa num sistema mais estratégico."
-      ];
-      ctaTexto = "Quero consolidar melhor as minhas finanças";
-    } else if (score >= 12) {
-      perfil = "Mulher em Estrutura";
-      resumo = "Já existe vontade de organizar, mas ainda falta transformar intenção em sistema.";
-      significado = "O teu resultado indica que estás numa fase de construção. Já percebeste que a organização financeira é essencial e provavelmente já tentaste melhorar em alguns momentos. O ponto agora é deixar de depender apenas da força de vontade e criar uma estrutura financeira simples, prática e sustentável, que te dê paz e direção.";
-      steps = [
-        "Criar um sistema financeiro claro e adaptado à tua realidade.",
-        "Ganhar consistência nas decisões do dia a dia.",
-        "Substituir esforço isolado por método e organização."
-      ];
-      ctaTexto = "Quero organizar melhor as minhas finanças";
-    } else {
-      perfil = "Mulher em Despertar";
-      resumo = "Estás numa fase em que o mais importante é ganhar clareza, reduzir o stress e começar a organizar a tua base.";
-      significado = "O teu resultado mostra que a tua relação com o dinheiro ainda pode estar muito marcada por reação, pressão ou insegurança. Isto não significa incapacidade. Significa apenas que precisas de base, orientação e estrutura. O primeiro passo não é fazer tudo. É começar a compreender o teu dinheiro e criar um ponto de estabilidade.";
-      steps = [
-        "Ganhar clareza sobre o que entra, sai e pesa no teu mês.",
-        "Reduzir a sensação de descontrolo financeiro.",
-        "Criar uma base simples para começares a organizar a tua vida financeira."
-      ];
-      ctaTexto = "Quero começar a organizar as minhas finanças";
-    }
+    <div class="cta-card">
+      <h2>Se te reveste nisto, o problema não é falta de capacidade.</h2>
+      <p>
+        É falta de clareza, estrutura e estratégia certa para a tua realidade.
+        E isso trabalha-se.
+        Se queres perceber o que ajustar nas tuas finanças pessoais, posso ajudar-te.
+      </p>
 
-    perfilTitulo.textContent = perfil;
-    perfilResumo.textContent = resumo;
-    significadoTexto.textContent = significado;
-    ctaButton.textContent = ctaTexto;
+      <div class="buttons">
+        <a
+          class="btn btn-primary"
+          href="https://wa.me/351936844029?text=Olá%20Marisa,%20fiz%20o%20teste%20financeiro%20e%20quero%20perceber%20melhor%20o%20meu%20caso."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Falar no WhatsApp
+        </a>
 
-    steps.forEach(step => {
-      const div = document.createElement("div");
-      div.className = "step";
-      div.textContent = step;
-      stepsList.appendChild(div);
-    });
-  </script>
+        <a
+          class="btn btn-secondary"
+          href="mailto:carreiromarisa@gmail.com?subject=Teste%20financeiro&body=Olá%20Marisa,%20fiz%20o%20teste%20financeiro%20e%20quero%20perceber%20melhor%20o%20meu%20caso."
+        >
+          Enviar email
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      Marisa Carreiro — Finanças Pessoais
+    </div>
+  </div>
 </body>
 </html>
